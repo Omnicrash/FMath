@@ -734,10 +734,13 @@ namespace FMath
 
         public static void Normalize(ref Vector4 value, out Vector4 result)
         {
-            result = value;
-            if (value == ZERO) return;
-            float lengthInverse = 1.0f / value.Length();
-            if (lengthInverse < FMath.EPSILON) return;
+            float lengthSq = value.LengthSq();
+            if (lengthSq < FMath.EPSILON)
+            {
+                result = ZERO;
+                return;
+            }
+            float lengthInverse = 1.0f / FMath.Sqrt(lengthSq);
             result = new Vector4(value.X * lengthInverse, value.Y * lengthInverse, value.Z * lengthInverse, value.W * lengthInverse);
         }
         public static Vector4 Normalize(ref Vector4 value)
