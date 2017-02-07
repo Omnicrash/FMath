@@ -562,7 +562,7 @@ namespace FMath
 
         public static void Billboard(ref Vector3 position, ref Vector3 cameraPosition, ref Vector3 cameraUpVector, ref Vector3 cameraForwardVector, out Matrix result)
         {
-            Vector3 difference; Vector3.Subtract(ref cameraPosition, ref position, out difference);
+            Vector3 difference; Vector3.Subtract(ref position, ref cameraPosition, out difference);
 
             float lengthsq = difference.LengthSq();
             if (lengthsq < FMath.EPSILON)
