@@ -43,10 +43,6 @@ namespace Frostfire.Math
         {
             return string.Format("X: {0}, Y: {1}", X, Y);
         }
-        public static implicit operator string(Coord2 value)
-        {
-            return value.ToString();
-        }
 
         public Vector2 ToVector2()
         {

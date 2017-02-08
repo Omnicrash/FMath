@@ -283,11 +283,7 @@ namespace Frostfire.Math
         {
             return string.Format(CultureInfo.CurrentCulture, "Normal:{0} D:{1}", Normal, D);
         }
-        public static implicit operator string(Plane value)
-        {
-            return value.ToString();
-        }
-
+        
         #endregion
 
     }

@@ -51,10 +51,6 @@ namespace Frostfire.Math
         {
             return string.Format("X: {0}, Y: {1}, Z: {2}", X, Y, Z);
         }
-        public static implicit operator string(Coord3 value)
-        {
-            return value.ToString();
-        }
 
         public bool Equals(Coord3 value)
         {
@@ -246,4 +242,3 @@ namespace Frostfire.Math
     }
 
 }
-

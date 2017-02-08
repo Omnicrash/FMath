@@ -256,10 +256,6 @@ namespace Frostfire.Math
         {
             return string.Format(CultureInfo.CurrentCulture, "Center:{0} Radius:{1}", this.Center, this.Radius);
         }
-        public static implicit operator string(BoundingSphere value)
-        {
-            return value.ToString();
-        }
 
     }
 }

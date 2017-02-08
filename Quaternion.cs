@@ -754,11 +754,7 @@ namespace Frostfire.Math
         {
             return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1} Z:{2} W:{3}", X, Y, Z, W);
         }
-        public static implicit operator string(Quaternion value)
-        {
-            return value.ToString();
-        }
-
+        
         #endregion
 
     }

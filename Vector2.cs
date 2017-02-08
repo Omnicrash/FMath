@@ -779,10 +779,6 @@ namespace Frostfire.Math
         {
             return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1}", this.X, this.Y);
         }
-        public static implicit operator string(Vector2 value)
-        {
-            return value.ToString();
-        }
 
         #endregion
 

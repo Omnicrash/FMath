@@ -395,10 +395,6 @@ namespace Frostfire.Math
         {
             return string.Format(CultureInfo.CurrentCulture, "Minimum:{0} Maximum:{1}", Minimum, Maximum);
         }
-        public static implicit operator string(BoundingBox value)
-        {
-            return value.ToString();
-        }
 
     }
 }

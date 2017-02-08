@@ -427,11 +427,7 @@ namespace Frostfire.Math
             else
                 return string.Format(CultureInfo.CurrentCulture, "Origin:{0} Length:{1} End:{2}", Origin.ToString(), Length.ToString(), End.ToString());
         }
-        public static implicit operator string(Ray value)
-        {
-            return value.ToString();
-        }
-
+        
         #endregion
 
     }
