@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -64,7 +64,7 @@ namespace FMath
         {
             return
                 this.Normal == value.Normal &&
-                Math.Abs(this.D - value.D) < FMath.EPSILON;
+                System.Math.Abs(this.D - value.D) < FMath.EPSILON;
         }
         public bool Equals(Plane value)
         {

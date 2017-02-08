@@ -1,29 +1,29 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     public static class FMath
     {
         public const float PI = 3.1415926535f;
         public const float HALF_PI = 1.570796326794f;
-        public const float EPSILON = 1.192092896e-07f; //-012f
-        
-        public const float RAD_TO_DEG = (float)(180.0 / System.Math.PI);
-        public const float DEG_TO_RAD = (float)(System.Math.PI / 180.0);
+        public const float EPSILON = 1.192092896e-07f; // or 1e-6f
+
+        const float RAD_TO_DEG = (float)(180.0 / System.Math.PI);
+        const float DEG_TO_RAD = (float)(System.Math.PI / 180.0);
 
         static readonly Random _randomizer = new Random();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Abs(float value)
         {
-            return Math.Abs(value);
+            return System.Math.Abs(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Acos(float value)
         {
-            return (float)Math.Acos(value);
+            return (float)System.Math.Acos(value);
         }
 
         public static int AddBool(params bool[] boolean)
@@ -38,25 +38,25 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Asin(float value)
         {
-            return (float)Math.Asin(value);
+            return (float)System.Math.Asin(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Atan(float value)
         {
-            return (float)Math.Atan(value);
+            return (float)System.Math.Atan(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Atan2(float x, float y)
         {
-            return (float)Math.Atan2(x, y);
+            return (float)System.Math.Atan2(x, y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Ceil(float value)
         {
-            return (float)Math.Ceiling(value);
+            return (float)System.Math.Ceiling(value);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace FMath
         public static int CeilToInt(float value)
         {
             int newValue = (int)value;
-            if (value < 0.0f || Math.Abs(newValue - value) < EPSILON)
+            if (value < 0.0f || System.Math.Abs(newValue - value) < EPSILON)
                 return newValue;
             return ++newValue;
         }
@@ -80,7 +80,7 @@ namespace FMath
             else
             {
                 x = (uint)value;
-                if (Math.Abs(x - value) < EPSILON)
+                if (System.Math.Abs(x - value) < EPSILON)
                     --x;
             }
 
@@ -145,13 +145,13 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Cos(float value)
         {
-            return (float)Math.Cos(value);
+            return (float)System.Math.Cos(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Cosh(float value)
         {
-            return (float)Math.Cosh(value);
+            return (float)System.Math.Cosh(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -180,13 +180,13 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Exp(float value)
         {
-            return (float)Math.Exp(value);
+            return (float)System.Math.Exp(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Floor(float value)
         {
-            return (float)Math.Floor(value);
+            return (float)System.Math.Floor(value);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace FMath
         public static int FloorToInt(float value)
         {
             int retValue = (int)value;
-            if (value > 0.0f || Math.Abs(value - retValue) < EPSILON)
+            if (value > 0.0f || System.Math.Abs(value - retValue) < EPSILON)
                 return retValue;
             return --retValue;
         }
@@ -205,7 +205,7 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEqual(float value1, float value2)
         {
-            return Math.Abs(value1 - value2) < EPSILON;
+            return System.Math.Abs(value1 - value2) < EPSILON;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -230,18 +230,18 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Log(float value)
         {
-            return (float)Math.Log(value);
+            return (float)System.Math.Log(value);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Log(float value, float newBase)
         {
-            return (float)Math.Log(value, newBase);
+            return (float)System.Math.Log(value, newBase);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Log10(float value)
         {
-            return (float)Math.Log10(value);
+            return (float)System.Math.Log10(value);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Pow(float value, float power)
         {
-            return (float)Math.Pow(value, power);
+            return (float)System.Math.Pow(value, power);
         }
 
         /// <summary>
@@ -298,31 +298,31 @@ namespace FMath
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Round(float value, int digits = 0)
         {
-            return (float)Math.Round(value, digits);
+            return (float)System.Math.Round(value, digits);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RoundToInt(float value)
         {
-            return (int)Math.Round(value);
+            return (int)System.Math.Round(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sign(float value)
         {
-            return Math.Sign(value);
+            return System.Math.Sign(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sin(float value)
         {
-            return (float)Math.Sin(value);
+            return (float)System.Math.Sin(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sinh(float value)
         {
-            return (float)Math.Sinh(value);
+            return (float)System.Math.Sinh(value);
         }
 
         /// <summary>
@@ -334,19 +334,19 @@ namespace FMath
         public static float Sqrt(float value)
         {
             // Still the fastest way to calculate the square root for a single precision floating point value in C#
-            return (float)Math.Sqrt(value);
+            return (float)System.Math.Sqrt(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Tan(float value)
         {
-            return (float)Math.Tan(value);
+            return (float)System.Math.Tan(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Tanh(float value)
         {
-            return (float)Math.Tanh(value);
+            return (float)System.Math.Tanh(value);
         }
 
         /// <summary>

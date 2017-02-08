@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -562,29 +562,30 @@ namespace FMath
 
         public static void Billboard(ref Vector3 position, ref Vector3 cameraPosition, ref Vector3 cameraUpVector, ref Vector3 cameraForwardVector, out Matrix result)
         {
-            Vector3 difference; Vector3.Subtract(ref cameraPosition, ref position, out difference);
-
-            float lengthsq = difference.LengthSq();
+            // Get the camera-object vector and normalize it to get the forward vector
+            Vector3 forward; Vector3.Subtract(ref cameraPosition, ref position, out forward);
+            float lengthsq = forward.LengthSq();
             if (lengthsq < FMath.EPSILON)
-                Vector3.Negate(ref cameraForwardVector, out difference);
+                Vector3.Negate(ref cameraForwardVector, out forward);
             else
-                difference.Multiply(1.0f / (float)System.Math.Sqrt(lengthsq));
+                forward.Multiply(1.0f / (float)System.Math.Sqrt(lengthsq));
+            
+            // Calculate remaining up & right vectors
+            Vector3 right; Vector3.Cross(ref cameraUpVector, ref forward, out right);
+            right.Normalize();
+            Vector3 up; Vector3.Cross(ref forward, ref right, out up);
 
-            Vector3 crossed; Vector3.Cross(ref cameraUpVector, ref difference, out crossed);
-            crossed.Normalize();
-            Vector3 final; Vector3.Cross(ref difference, ref crossed, out final);
-
-            result.M11 = crossed.X;
-            result.M12 = crossed.Y;
-            result.M13 = crossed.Z;
+            result.M11 = right.X;
+            result.M12 = right.Y;
+            result.M13 = right.Z;
             result.M14 = 0.0f;
-            result.M21 = final.X;
-            result.M22 = final.Y;
-            result.M23 = final.Z;
+            result.M21 = up.X;
+            result.M22 = up.Y;
+            result.M23 = up.Z;
             result.M24 = 0.0f;
-            result.M31 = difference.X;
-            result.M32 = difference.Y;
-            result.M33 = difference.Z;
+            result.M31 = forward.X;
+            result.M32 = forward.Y;
+            result.M33 = forward.Z;
             result.M34 = 0.0f;
             result.M41 = position.X;
             result.M42 = position.Y;
@@ -643,7 +644,7 @@ namespace FMath
             float d14 = value.M21 * b3 + value.M22 * -b1 + value.M23 * b0;
 
             float det = value.M11 * d11 - value.M12 * d12 + value.M13 * d13 - value.M14 * d14;
-            if (Math.Abs(det) <= FMath.EPSILON)
+            if (System.Math.Abs(det) <= FMath.EPSILON)
                 return;
 
             det = 1.0f / det;
@@ -842,8 +843,8 @@ namespace FMath
         
         public static void RotationX(float angle, out Matrix result)
         {
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos = (float)System.Math.Cos(angle);
+            float sin = (float)System.Math.Sin(angle);
 
             result = Matrix.IDENTITY;
             result.M22 = cos;
@@ -860,8 +861,8 @@ namespace FMath
 
         public static void RotationY(float angle, out Matrix result)
         {
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos = (float)System.Math.Cos(angle);
+            float sin = (float)System.Math.Sin(angle);
 
             result = Matrix.IDENTITY;
             result.M11 = cos;
@@ -872,14 +873,14 @@ namespace FMath
         public static Matrix RotationY(float angle)
         {
             Matrix result;
-            RotationX(angle, out result);
+            RotationY(angle, out result);
             return result;
         }
 
         public static void RotationZ(float angle, out Matrix result)
         {
-            float cos = (float)Math.Cos(angle);
-            float sin = (float)Math.Sin(angle);
+            float cos = (float)System.Math.Cos(angle);
+            float sin = (float)System.Math.Sin(angle);
 
             result = Matrix.IDENTITY;
             result.M11 = cos;
@@ -890,7 +891,7 @@ namespace FMath
         public static Matrix RotationZ(float angle)
         {
             Matrix result;
-            RotationX(angle, out result);
+            RotationZ(angle, out result);
             return result;
         }
 
@@ -1120,14 +1121,14 @@ namespace FMath
             translation.Z = this.M43;
 
             // Scaling is the length of the rows
-            scale.X = (float)Math.Sqrt((M11 * M11) + (M12 * M12) + (M13 * M13));
-            scale.Y = (float)Math.Sqrt((M21 * M21) + (M22 * M22) + (M23 * M23));
-            scale.Z = (float)Math.Sqrt((M31 * M31) + (M32 * M32) + (M33 * M33));
+            scale.X = (float)System.Math.Sqrt((M11 * M11) + (M12 * M12) + (M13 * M13));
+            scale.Y = (float)System.Math.Sqrt((M21 * M21) + (M22 * M22) + (M23 * M23));
+            scale.Z = (float)System.Math.Sqrt((M31 * M31) + (M32 * M32) + (M33 * M33));
 
             // If any of the scaling factors are zero, then the rotation matrix can not exist
-            if (Math.Abs(scale.X) < FMath.EPSILON ||
-                Math.Abs(scale.Y) < FMath.EPSILON ||
-                Math.Abs(scale.Z) < FMath.EPSILON)
+            if (System.Math.Abs(scale.X) < FMath.EPSILON ||
+                System.Math.Abs(scale.Y) < FMath.EPSILON ||
+                System.Math.Abs(scale.Z) < FMath.EPSILON)
             {
                 rotation = Quaternion.IDENTITY;
                 return;

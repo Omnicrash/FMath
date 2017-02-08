@@ -1,4 +1,4 @@
-namespace FMath
+namespace Frostfire.Math
 {
     public enum ContainmentType
     {

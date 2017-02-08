@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -56,7 +56,7 @@ namespace FMath
             return
                 Origin == value.Origin &&
                 Direction == value.Direction &&
-                Math.Abs(Length - value.Length) < FMath.EPSILON;
+                System.Math.Abs(Length - value.Length) < FMath.EPSILON;
         }
         public bool Equals(Ray value)
         {

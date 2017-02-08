@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -681,12 +681,12 @@ namespace FMath
             float halfPitch = pitch * 0.5f;
             float halfYaw = yaw * 0.5f;
 
-            float sinRoll = (float)Math.Sin(halfRoll);
-            float cosRoll = (float)Math.Cos(halfRoll);
-            float sinPitch = (float)Math.Sin(halfPitch);
-            float cosPitch = (float)Math.Cos(halfPitch);
-            float sinYaw = (float)Math.Sin(halfYaw);
-            float cosYaw = (float)Math.Cos(halfYaw);
+            float sinRoll = (float)System.Math.Sin(halfRoll);
+            float cosRoll = (float)System.Math.Cos(halfRoll);
+            float sinPitch = (float)System.Math.Sin(halfPitch);
+            float cosPitch = (float)System.Math.Cos(halfPitch);
+            float sinYaw = (float)System.Math.Sin(halfYaw);
+            float cosYaw = (float)System.Math.Cos(halfYaw);
 
             result.X = (cosYaw * sinPitch * cosRoll) + (sinYaw * cosPitch * sinRoll);
             result.Y = (sinYaw * cosPitch * cosRoll) - (cosYaw * sinPitch * sinRoll);

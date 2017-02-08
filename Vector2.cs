@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -317,8 +317,8 @@ namespace FMath
 
         public static void Abs(ref Vector2 value, out Vector2 result)
         {
-            result.X = Math.Abs(value.X);
-            result.Y = Math.Abs(value.Y);
+            result.X = System.Math.Abs(value.X);
+            result.Y = System.Math.Abs(value.Y);
         }
         public static Vector2 Abs(ref Vector2 value)
         {
@@ -644,10 +644,13 @@ namespace FMath
 
         public static void Normalize(ref Vector2 value, out Vector2 result)
         {
-            result = ZERO;
-            if (value == ZERO) return;
-            float lengthInverse = 1.0f / value.Length();
-            if (lengthInverse < FMath.EPSILON) return;
+            float lengthSq = value.LengthSq();
+            if (lengthSq < FMath.EPSILON)
+            {
+                result = ZERO;
+                return;
+            }
+            float lengthInverse = 1.0f / FMath.Sqrt(lengthSq);
             result = new Vector2(value.X * lengthInverse, value.Y * lengthInverse);
         }
         public static Vector2 Normalize(ref Vector2 value)

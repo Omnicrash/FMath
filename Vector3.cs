@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -315,9 +315,9 @@ namespace FMath
         public bool Equals(ref Vector3 value)
         {
             return
-                Math.Abs(this.X - value.X) < FMath.EPSILON &&
-                Math.Abs(this.Y - value.Y) < FMath.EPSILON &&
-                Math.Abs(this.Z - value.Z) < FMath.EPSILON;
+                System.Math.Abs(this.X - value.X) < FMath.EPSILON &&
+                System.Math.Abs(this.Y - value.Y) < FMath.EPSILON &&
+                System.Math.Abs(this.Z - value.Z) < FMath.EPSILON;
         }
         public bool Equals(Vector3 value)
         {
@@ -345,9 +345,9 @@ namespace FMath
 
         public static void Abs(ref Vector3 value, out Vector3 result)
         {
-            result.X = Math.Abs(value.X);
-            result.Y = Math.Abs(value.Y);
-            result.Z = Math.Abs(value.Z);
+            result.X = System.Math.Abs(value.X);
+            result.Y = System.Math.Abs(value.Y);
+            result.Z = System.Math.Abs(value.Z);
         }
         public static Vector3 Abs(ref Vector3 value)
         {
@@ -450,9 +450,9 @@ namespace FMath
         {
             result = new Vector3()
             {
-                X = right.Z * left.Y - left.Z * right.Y,
-                Y = left.Z * right.X - right.Z * left.X,
-                Z = right.Y * left.X - left.Y * right.X
+                X = left.Y * right.Z - left.Z * right.Y,
+                Y = left.Z * right.X - left.X * right.Z,
+                Z = left.X * right.Y - left.Y * right.X
             };
         }
         public static Vector3 Cross(ref Vector3 left, ref Vector3 right)
@@ -473,7 +473,7 @@ namespace FMath
             float diffX = left.X - right.X;
             float diffY = left.Y - right.Y;
             float diffZ = left.Z - right.Z;
-            result = (float)Math.Sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
+            result = (float)System.Math.Sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
         }
         public static float Distance(ref Vector3 left, ref Vector3 right)
         {
@@ -549,19 +549,19 @@ namespace FMath
 
         public static void Length(ref Vector3 value, out float result)
         {
-            result = (float)Math.Sqrt(value.X * value.X + value.Y * value.Y + value.Z * value.Z);
+            result = (float)System.Math.Sqrt(value.X * value.X + value.Y * value.Y + value.Z * value.Z);
         }
         public static float Length(ref Vector3 value)
         {
-            return (float)Math.Sqrt(value.X * value.X + value.Y * value.Y + value.Z * value.Z);
+            return (float)System.Math.Sqrt(value.X * value.X + value.Y * value.Y + value.Z * value.Z);
         }
         public static float Length(Vector3 value)
         {
-            return (float)Math.Sqrt(value.X * value.X + value.Y * value.Y + value.Z * value.Z);
+            return (float)System.Math.Sqrt(value.X * value.X + value.Y * value.Y + value.Z * value.Z);
         }
         public float Length()
         {
-            return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
+            return (float)System.Math.Sqrt(X * X + Y * Y + Z * Z);
         }
 
         public static void LengthSq(ref Vector3 value, out float result)
@@ -670,19 +670,19 @@ namespace FMath
         /// <returns></returns>
         public static void Max(ref Vector3 value, out float result)
         {
-            result = Math.Max(value.X, Math.Max(value.Y, value.Z));
+            result = System.Math.Max(value.X, System.Math.Max(value.Y, value.Z));
         }
         public static float Max(ref Vector3 value)
         {
-            return Math.Max(value.X, Math.Max(value.Y, value.Z));
+            return System.Math.Max(value.X, System.Math.Max(value.Y, value.Z));
         }
         public static float Max(Vector3 value)
         {
-            return Math.Max(value.X, Math.Max(value.Y, value.Z));
+            return System.Math.Max(value.X, System.Math.Max(value.Y, value.Z));
         }
         public float Max()
         {
-            return Math.Max(X, Math.Max(Y, Z));
+            return System.Math.Max(X, System.Math.Max(Y, Z));
         }
 
         /// <summary>
@@ -693,27 +693,30 @@ namespace FMath
         /// <returns></returns>
         public static void Min(ref Vector3 value, out float result)
         {
-            result = Math.Min(value.X, Math.Min(value.Y, value.Z));
+            result = System.Math.Min(value.X, System.Math.Min(value.Y, value.Z));
         }
         public static float Min(ref Vector3 value)
         {
-            return Math.Min(value.X, Math.Min(value.Y, value.Z));
+            return System.Math.Min(value.X, System.Math.Min(value.Y, value.Z));
         }
         public static float Min(Vector3 value)
         {
-            return Math.Min(value.X, Math.Min(value.Y, value.Z));
+            return System.Math.Min(value.X, System.Math.Min(value.Y, value.Z));
         }
         public float Min()
         {
-            return Math.Min(X, Math.Min(Y, Z));
+            return System.Math.Min(X, System.Math.Min(Y, Z));
         }
 
         public static void Normalize(ref Vector3 value, out Vector3 result)
         {
-            result = ZERO;
-            if (value == ZERO) return;
-            float lengthInverse = 1.0f / value.Length();
-            if (lengthInverse < FMath.EPSILON) return;
+            float lengthSq = value.LengthSq();
+            if (lengthSq < FMath.EPSILON)
+            {
+                result = ZERO;
+                return;
+            }
+            float lengthInverse = 1.0f / FMath.Sqrt(lengthSq);
             result = new Vector3(value.X * lengthInverse, value.Y * lengthInverse, value.Z * lengthInverse);
         }
         public static Vector3 Normalize(ref Vector3 value)

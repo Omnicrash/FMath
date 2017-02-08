@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -366,10 +366,10 @@ namespace FMath
 
         public static void Abs(ref Vector4 value, out Vector4 result)
         {
-            result.X = Math.Abs(value.X);
-            result.Y = Math.Abs(value.Y);
-            result.Z = Math.Abs(value.Z);
-            result.W = Math.Abs(value.W);
+            result.X = System.Math.Abs(value.X);
+            result.Y = System.Math.Abs(value.Y);
+            result.Z = System.Math.Abs(value.Z);
+            result.W = System.Math.Abs(value.W);
         }
         public static Vector4 Abs(ref Vector4 value)
         {
@@ -734,10 +734,13 @@ namespace FMath
 
         public static void Normalize(ref Vector4 value, out Vector4 result)
         {
-            result = ZERO;
-            if (value == ZERO) return;
-            float lengthInverse = 1.0f / value.Length();
-            if (lengthInverse < FMath.EPSILON) return;
+            float lengthSq = value.Length();
+            if (lengthSq < FMath.EPSILON)
+            {
+                result = ZERO;
+                return;
+            }
+            float lengthInverse = 1.0f / FMath.Sqrt(lengthSq);
             result = new Vector4(value.X * lengthInverse, value.Y * lengthInverse, value.Z * lengthInverse, value.W * lengthInverse);
         }
         public static Vector4 Normalize(ref Vector4 value)

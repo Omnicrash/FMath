@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FMath
+namespace Frostfire.Math
 {
     /// <summary>
     /// Defines a coordinate with 3 components.
@@ -147,9 +147,9 @@ namespace FMath
 
         public static void Abs(ref Coord3 value, out Coord3 result)
         {
-            result.X = Math.Abs(value.X);
-            result.Y = Math.Abs(value.Y);
-            result.Z = Math.Abs(value.Z);
+            result.X = System.Math.Abs(value.X);
+            result.Y = System.Math.Abs(value.Y);
+            result.Z = System.Math.Abs(value.Z);
         }
         public static Coord3 Abs(ref Coord3 value)
         {
