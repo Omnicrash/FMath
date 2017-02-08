@@ -562,29 +562,30 @@ namespace FMath
 
         public static void Billboard(ref Vector3 position, ref Vector3 cameraPosition, ref Vector3 cameraUpVector, ref Vector3 cameraForwardVector, out Matrix result)
         {
-            Vector3 difference; Vector3.Subtract(ref position, ref cameraPosition, out difference);
-
-            float lengthsq = difference.LengthSq();
+            // Get the camera-object vector and normalize it to get the forward vector
+            Vector3 forward; Vector3.Subtract(ref cameraPosition, ref position, out forward);
+            float lengthsq = forward.LengthSq();
             if (lengthsq < FMath.EPSILON)
-                Vector3.Negate(ref cameraForwardVector, out difference);
+                Vector3.Negate(ref cameraForwardVector, out forward);
             else
-                difference.Multiply(1.0f / (float)System.Math.Sqrt(lengthsq));
+                forward.Multiply(1.0f / (float)System.Math.Sqrt(lengthsq));
+            
+            // Calculate remaining up & right vectors
+            Vector3 right; Vector3.Cross(ref cameraUpVector, ref forward, out right);
+            right.Normalize();
+            Vector3 up; Vector3.Cross(ref forward, ref right, out up);
 
-            Vector3 crossed; Vector3.Cross(ref cameraUpVector, ref difference, out crossed);
-            crossed.Normalize();
-            Vector3 final; Vector3.Cross(ref difference, ref crossed, out final);
-
-            result.M11 = crossed.X;
-            result.M12 = crossed.Y;
-            result.M13 = crossed.Z;
+            result.M11 = right.X;
+            result.M12 = right.Y;
+            result.M13 = right.Z;
             result.M14 = 0.0f;
-            result.M21 = final.X;
-            result.M22 = final.Y;
-            result.M23 = final.Z;
+            result.M21 = up.X;
+            result.M22 = up.Y;
+            result.M23 = up.Z;
             result.M24 = 0.0f;
-            result.M31 = difference.X;
-            result.M32 = difference.Y;
-            result.M33 = difference.Z;
+            result.M31 = forward.X;
+            result.M32 = forward.Y;
+            result.M33 = forward.Z;
             result.M34 = 0.0f;
             result.M41 = position.X;
             result.M42 = position.Y;
