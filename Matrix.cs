@@ -872,7 +872,7 @@ namespace FMath
         public static Matrix RotationY(float angle)
         {
             Matrix result;
-            RotationX(angle, out result);
+            RotationY(angle, out result);
             return result;
         }
 
@@ -890,7 +890,7 @@ namespace FMath
         public static Matrix RotationZ(float angle)
         {
             Matrix result;
-            RotationX(angle, out result);
+            RotationZ(angle, out result);
             return result;
         }
 
