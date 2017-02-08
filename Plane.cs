@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -281,7 +282,7 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "Normal:{0} D:{1}", Normal, D);
+            return Invariant($"Normal:{Normal} D:{D}");
         }
         
         #endregion

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -880,6 +881,16 @@ namespace Frostfire.Math
             return new Vector2(X, Y);
         }
 
+        public Vector4 ToVector4(float w = 0.0f)
+        {
+            return new Vector4(X, Y, Z, w);
+        }
+
+        public Coord3 ToCoord3()
+        {
+            return new Coord3((int)X, (int)Y, (int)Z);
+        }
+
         public static Vector3 FromColor(Color color)
         {
             return new Vector3(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
@@ -888,10 +899,9 @@ namespace Frostfire.Math
         {
             return Color.FromArgb((int)(color.X * 255.0f), (int)(color.Y * 255.0f), (int)(color.Z * 255.0f));
         }
-
-        public Vector4 ToVector4(float w = 0.0f)
+        public Color ToColor()
         {
-            return new Vector4(X, Y, Z, w);
+            return ToColor(this);
         }
 
         public float[] ToArray()
@@ -901,7 +911,7 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1} Z:{2}", this.X, this.Y, this.Z);
+            return Invariant($"X:{X} Y:{Y} Z:{Z}");
         }
         
         #endregion

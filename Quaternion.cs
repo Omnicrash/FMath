@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -752,7 +753,7 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1} Z:{2} W:{3}", X, Y, Z, W);
+            return Invariant($"X:{X} Y:{Y} Z:{Z} W:{W}");
         }
         
         #endregion

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -833,7 +834,12 @@ namespace Frostfire.Math
 
 
         #region Conversion
-        
+
+        public Vector2 ToVector2()
+        {
+            return new Vector2(X, Y);
+        }
+
         public Vector3 ToVector3()
         {
             return new Vector3(X, Y, Z);
@@ -859,7 +865,7 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1} Z:{2} W:{3}", this.X, this.Y, this.Z, this.W);
+            return Invariant($"X:{X} Y:{Y} Z:{Z} W:{W}");
         }
         
         #endregion

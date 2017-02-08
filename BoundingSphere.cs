@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -201,8 +202,10 @@ namespace Frostfire.Math
         }
 
         #endregion
-        
 
+
+        #region Conversion
+        
         public static BoundingSphere CreateFromPoints(Vector3[] points)
         {
             if (points == null || points.Length <= 0)
@@ -254,8 +257,10 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "Center:{0} Radius:{1}", this.Center, this.Radius);
+            return Invariant($"Center:{Center} Radius:{Radius}");
         }
+
+        #endregion
 
     }
 }

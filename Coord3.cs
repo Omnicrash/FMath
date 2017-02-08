@@ -1,6 +1,8 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -35,23 +37,7 @@ namespace Frostfire.Math
             Y = y;
             Z = z;
         }
-        public Coord3(Vector3 vector)
-        {
-            X = (int)vector.X;
-            Y = (int)vector.Y;
-            Z = (int)vector.Z;
-        }
         
-        public Vector3 ToVector3()
-        {
-            return new Vector3(X, Y, Z);
-        }
-
-        public override string ToString()
-        {
-            return string.Format("X: {0}, Y: {1}, Z: {2}", X, Y, Z);
-        }
-
         public bool Equals(Coord3 value)
         {
             return value.X == X && value.Y == Y && value.Z == Z;
@@ -220,6 +206,30 @@ namespace Frostfire.Math
             return Min(this);
         }
 
+
+        #region Conversion
+
+        public Coord2 ToCoord2()
+        {
+            return new Coord2(X, Y);
+        }
+
+        public Vector3 ToVector3()
+        {
+            return new Vector3(X, Y, Z);
+        }
+
+        public int[] ToArray()
+        {
+            return new int[] { X, Y, Z };
+        }
+
+        public override string ToString()
+        {
+            return Invariant($"X: {X}, Y: {Y}, Z: {Z}");
+        }
+
+        #endregion
 
     }
 

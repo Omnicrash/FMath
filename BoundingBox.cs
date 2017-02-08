@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -324,7 +325,9 @@ namespace Frostfire.Math
 
         #endregion
 
-        
+
+        #region Conversion
+
         public void AddPoint(ref Vector3 point)
         {
             Maximum.Maximize(ref point);
@@ -356,7 +359,7 @@ namespace Frostfire.Math
 
             return new BoundingBox(extents, center);
         }
-        
+
         public static void Merge(ref BoundingBox a, ref BoundingBox b, out BoundingBox result)
         {
             result.Minimum = Vector3.Minimize(a.Minimum, b.Minimum);
@@ -393,8 +396,10 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "Minimum:{0} Maximum:{1}", Minimum, Maximum);
+            return Invariant($"Minimum:{Minimum} Maximum:{Maximum}");
         }
+
+        #endregion
 
     }
 }

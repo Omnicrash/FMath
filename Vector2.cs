@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -770,6 +771,16 @@ namespace Frostfire.Math
             return new Vector3(X, Y, z);
         }
 
+        public Vector4 ToVector4(float z = 0.0f, float w = 0.0f)
+        {
+            return new Vector4(X, Y, z, w);
+        }
+
+        public Coord2 ToCoord2()
+        {
+            return new Coord2((int)X, (int)Y);
+        }
+
         public float[] ToArray()
         {
             return new float[] { X, Y };
@@ -777,7 +788,7 @@ namespace Frostfire.Math
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1}", this.X, this.Y);
+            return Invariant($"X:{X} Y:{Y}");
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -423,9 +424,9 @@ namespace Frostfire.Math
         public override string ToString()
         {
             if (Single.IsPositiveInfinity(Length))
-                return string.Format(CultureInfo.CurrentCulture, "Origin:{0} Direction:{1}", Origin.ToString(), Direction.ToString());
+                return Invariant($"Origin:{Origin} Direction:{Direction}");
             else
-                return string.Format(CultureInfo.CurrentCulture, "Origin:{0} Length:{1} End:{2}", Origin.ToString(), Length.ToString(), End.ToString());
+                return Invariant($"Origin:{Origin} Length:{Length} End:{End}");
         }
         
         #endregion

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using static System.FormattableString;
 
 namespace Frostfire.Math
 {
@@ -32,21 +33,6 @@ namespace Frostfire.Math
         {
             X = x;
             Y = y;
-        }
-        public Coord2(Vector2 vector)
-        {
-            X = (int)vector.X;
-            Y = (int)vector.Y;
-        }
-        
-        public override string ToString()
-        {
-            return string.Format("X: {0}, Y: {1}", X, Y);
-        }
-
-        public Vector2 ToVector2()
-        {
-            return new Vector2(X, Y);
         }
 
         public bool Equals(Coord2 value)
@@ -205,6 +191,31 @@ namespace Frostfire.Math
         {
             return Min(this);
         }
+
+
+        #region Conversion
+
+        public Coord3 ToCoord3(int z = 0)
+        {
+            return new Coord3(X, Y, z);
+        }
+
+        public Vector2 ToVector2()
+        {
+            return new Vector2(X, Y);
+        }
+
+        public int[] ToArray()
+        {
+            return new int[] { X, Y };
+        }
+
+        public override string ToString()
+        {
+            return Invariant($"X: {X}, Y: {Y}");
+        }
+
+        #endregion
 
     }
 
