@@ -36,7 +36,7 @@ namespace Frostfire.Math
                     case 2: return Z;
                     case 3: return W;
                 }
-                throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
             }
 
             set
@@ -47,7 +47,7 @@ namespace Frostfire.Math
                     case 1: Y = value; break;
                     case 2: Z = value; break;
                     case 3: W = value; break;
-                    default: throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                    default: throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
                 }
             }
         }

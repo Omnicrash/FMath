@@ -56,7 +56,7 @@ namespace Frostfire.Math
                     case 3:
                         return this.W;
                     default:
-                        throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                        throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
                 }
             }
             set
@@ -76,7 +76,7 @@ namespace Frostfire.Math
                         this.W = value;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                        throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
                 }
             }
         }

@@ -30,9 +30,9 @@ namespace Frostfire.Math
         public Matrix(float[] values)
         {
             if (values == null)
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             if (values.Length != 16)
-                throw new ArgumentOutOfRangeException("values", "Matrix must be defined by 16 values.");
+                throw new ArgumentOutOfRangeException(nameof(values), "Matrix must be defined by 16 values.");
 
             M11 = values[0];
             M12 = values[1];
@@ -77,7 +77,7 @@ namespace Frostfire.Math
                     case 13: return M42;
                     case 14: return M43;
                     case 15: return M44;
-                    default: throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                    default: throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
                 }
             }
             set
@@ -100,7 +100,7 @@ namespace Frostfire.Math
                     case 13: M42 = value; break;
                     case 14: M43 = value; break;
                     case 15: M44 = value; break;
-                    default: throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                    default: throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
                 }
             }
         }
@@ -109,18 +109,18 @@ namespace Frostfire.Math
             get
             {
                 if (row < 0 || row > 3)
-                    throw new ArgumentOutOfRangeException("row");
+                    throw new ArgumentOutOfRangeException(nameof(row));
                 if (column < 0 || column > 3)
-                    throw new ArgumentOutOfRangeException("column");
+                    throw new ArgumentOutOfRangeException(nameof(column));
 
                 return this[(row * 4) + column];
             }
             set
             {
                 if (row < 0 || row > 3)
-                    throw new ArgumentOutOfRangeException("row");
+                    throw new ArgumentOutOfRangeException(nameof(row));
                 if (column < 0 || column > 3)
-                    throw new ArgumentOutOfRangeException("column");
+                    throw new ArgumentOutOfRangeException(nameof(column));
 
                 this[(row * 4) + column] = value;
             }

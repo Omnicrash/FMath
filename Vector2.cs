@@ -43,7 +43,7 @@ namespace Frostfire.Math
                 if (index == 1)
                     return this.Y;
                 
-                throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
             }
             set
             {
@@ -52,7 +52,7 @@ namespace Frostfire.Math
                 if (index == 1)
                     this.Y = value;
 
-                throw new ArgumentOutOfRangeException("index", "Index out of range.");
+                throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
             }
         }
 

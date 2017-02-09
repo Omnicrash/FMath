@@ -209,7 +209,7 @@ namespace Frostfire.Math
         public static BoundingSphere CreateFromPoints(Vector3[] points)
         {
             if (points == null || points.Length <= 0)
-                throw new ArgumentNullException("points");
+                throw new ArgumentNullException(nameof(points));
 
             Vector3 boundsMin = new Vector3(float.MaxValue);
             Vector3 boundsMax = new Vector3(float.MinValue);
